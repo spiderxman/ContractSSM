@@ -1,9 +1,11 @@
 package com.masago.service;
 
+import java.util.List;
+
 import com.masago.bean.UserInfoBean;
 
 public interface GetUserInfoService {
 
-    UserInfoBean login(String userId);
+    List<UserInfoBean> getUserInfo(String userId, String userName, String userRoot, String delFlag);
 
 }

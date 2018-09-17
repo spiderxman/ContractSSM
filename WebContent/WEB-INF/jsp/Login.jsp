@@ -45,7 +45,7 @@
 		        </FIELDSET>
 	      </DIV>
 	   </DIV>
-	<form name="login_form" action="Login1" method="post">
+	<form name="login_form" action="Login" method="post">
 	  <DIV style="POSITION: relative; MARGIN: 326px 0px 0px 440px; WIDTH: 380px; HEIGHT: 180px">
 	      <DIV style="WIDTH: 100%; HEIGHT: 50px">
 	        <DIV style="POSITION: absolute; MARGIN-TOP: 32px; WIDTH: 120px; FLOAT: left; left: 9px; top: 4px;">
@@ -64,7 +64,6 @@
 		          BORDER-RIGHT: #e4e4e4 1px solid" type=password>
 		        </DIV>
 	      	</DIV>
-	      	<br>
 	      	<div id="msg" style="width: 100%;text-align:center;font-family:verdana;font-size:16px;color:#FF0000">
 	      		${message}
 	      	</div>
@@ -80,6 +79,7 @@
 		        </DIV>
 	    	</DIV>
 	    </DIV>
+	    <input type="hidden" id="req_gid" name="req_gid" value="loaded"/>
     </form>
   </DIV>
 </BODY>
