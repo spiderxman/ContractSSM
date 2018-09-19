@@ -5,9 +5,8 @@
 <HEAD>
 <TITLE>ログイン</TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
-<LINK rel=stylesheet type=text/css href="./css/Index.css">
-<LINK rel=stylesheet type=text/css href="./css/Style.css">
 <META name=GENERATOR content="MSHTML 9.00.8112.16476">
+<jsp:include page="./res/meta.jsp"/>
 <script language="JavaScript">
  function submit(){
 	 if(!inputCheck()){

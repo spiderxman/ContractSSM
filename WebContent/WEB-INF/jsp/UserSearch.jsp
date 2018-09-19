@@ -5,9 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザ検索</title>
-<link rel="stylesheet" type="text/css" href="./css/Index.css" />
-<link rel="stylesheet" type="text/css" href="./css/Style.css" />
-<script type="text/javascript" src="./js/common.js" charset="UTF-8"></script>
+<jsp:include page="./res/meta.jsp"/>
 
 <SCRIPT language=javascript type=text/javascript>
     var timeClient = new Date();
@@ -116,13 +114,14 @@
         </TBODY>
     </TABLE>
 </DIV>
-<DIV style="TEXT-ALIGN: right; WIDTH: 100%" class=btnContent>
-	<a href="javascript:void(0);" class="btn" onclick="userSearch();"><center>検索</center></a>
-	<a href="javascript:void(0);" class="btn"><center>追加</center></a>
+<DIV style="TEXT-ALIGN: center; WIDTH: 100%;">
+	<button type="button" class="btn btn-primary btn-lg active"  onclick="userSearch();">検索</button>
+	<button type="button" class="btn btn-primary btn-lg active"  onclick="">追加</button>
 </DIV>
 
 <!-- ユーザ検索結果一覧 -->
 <DIV style="HEIGHT: 400px" class=gvContent>
+<c:if test="${userInfoList.size() > 0}">
 <DIV>
 <TABLE style="WIDTH: 100%; BORDER-COLLAPSE: collapse"
     id=ctl00_mainContent_gvList border=1 rules=all cellSpacing=0
@@ -175,9 +174,11 @@
             	<TD align=left>${userInfo.updateDate}</TD>
         	</TR>
         </c:forEach>
+
     </TBODY>
 </TABLE>
 </DIV>
+</c:if>
 </DIV>
 
 <INPUT id=ctl00_hidTime name=ctl00$hidTime value=2014/02/17 15:08:36 type=hidden />

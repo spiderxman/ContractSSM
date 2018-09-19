@@ -5,9 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>メイン画面</title>
-<link rel="stylesheet" type="text/css" href="./css/Index.css" />
-<link rel="stylesheet" type="text/css" href="./css/Style.css" />
-<script type="text/javascript" src="./js/common.js" charset="UTF-8"></script>
+<jsp:include page="./res/meta.jsp"/>
 
 <SCRIPT language=javascript type=text/javascript>
     var timeClient = new Date();

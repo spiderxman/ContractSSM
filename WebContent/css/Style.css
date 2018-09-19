@@ -14,6 +14,7 @@
  } 
 
 #nav li{
+ list-style-type:none;
  float:left;
  text-align:center;
  }
@@ -22,7 +23,7 @@
  color:white;
  background:url('../Image/OrderManage.jpg');
  height:36px;
- padding:10px 4px;
+ padding:0px 14px;
  }
 #nav li a:hover{
  color:white;
