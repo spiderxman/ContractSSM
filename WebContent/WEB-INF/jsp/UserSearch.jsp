@@ -5,8 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザ検索</title>
-<jsp:include page="./res/meta.jsp"/>
-
 <SCRIPT language=javascript type=text/javascript>
     var timeClient = new Date();
 
@@ -65,7 +63,7 @@
 </DIV>
 <FORM id="userSearchForm" style="TEXT-ALIGN: center" method=post action="UserSearch">
 <DIV style="WIDTH: 1158px; HEIGHT: 30px">
-    <DIV style="BACKGROUND-IMAGE: url(../Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 20px; TEXT-INDENT: 20px; WIDTH: 65%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
+    <DIV style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 20px; TEXT-INDENT: 20px; WIDTH: 65%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
         id=ctl00_lbltitle class=title>ユーザー検索</SPAN>
     </DIV>
     <DIV style="TEXT-ALIGN: left; MARGIN-TOP: 20px; WIDTH: 30%; FLOAT: right; HEIGHT: 50px">
@@ -115,8 +113,8 @@
     </TABLE>
 </DIV>
 <DIV style="TEXT-ALIGN: center; WIDTH: 100%;">
-	<button type="button" class="btn btn-primary btn-lg active"  onclick="userSearch();">検索</button>
-	<button type="button" class="btn btn-primary btn-lg active"  onclick="">追加</button>
+	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="userSearch();">検索</a>
+	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="">追加</a>
 </DIV>
 
 <!-- ユーザ検索結果一覧 -->
@@ -125,7 +123,7 @@
 <DIV>
 <TABLE style="WIDTH: 100%; BORDER-COLLAPSE: collapse"
     id=ctl00_mainContent_gvList border=1 rules=all cellSpacing=0
-    cellPadding=0>
+    cellPadding=0 class="table table-hover">
     <TBODY>
         <TR class=gvHeader>
             <TH style="WIDTH: 8%" scope=col>操作</TH>
@@ -151,7 +149,7 @@
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$更新日')">更新日</A></TH>
         </TR>
         <c:forEach var="userInfo" items="${userInfoList }">
-        	<TR class=gvRow
+        	<TR
             	onclick="if(window.oldtr!=null){window.oldtr.runtimeStyle.cssText='';}this.runtimeStyle.cssText='background-color:#CCCCFF';window.oldtr=this;">
             	<TD style="WIDTH: 8%" align=center><A
                 	id=ctl00_mainContent_gvList_ctl02_lnkEdit href="UserUpdate.htm">編集</A>
