@@ -43,7 +43,7 @@
   			user_id = #{userId, jdbcType=VARCHAR}
   		</if>
   		<if test="userName != '' and userName != null">
-  			AND user_name = #{userName, jdbcType=VARCHAR}
+  			AND user_name like CONCAT('%',#{userName, jdbcType=VARCHAR},'%')
   		</if>
   		<if test="userRoot != '' and userRoot != null">
   			AND authority_cd = #{userRoot, jdbcType=VARCHAR}

@@ -25,7 +25,7 @@
 <jsp:include page="Header.jsp"/>
     <FORM style="TEXT-ALIGN: center" id=mainForm method=post name=mainForm action="Login">
         <DIV style="WIDTH: 1158px; HEIGHT: 30px">
-            <DIV style="BACKGROUND-IMAGE: url(Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 60px; TEXT-INDENT: 20px; WIDTH: 65%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px">
+            <DIV style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 60px; TEXT-INDENT: 20px; WIDTH: 65%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px">
                 <SPAN id=ctl00_lbltitle class=title>メイン画面</SPAN>
             </DIV>
         </DIV>

@@ -63,10 +63,10 @@
 </DIV>
 <FORM id="userSearchForm" style="TEXT-ALIGN: center" method=post action="UserSearch">
 <DIV style="WIDTH: 1158px; HEIGHT: 30px">
-    <DIV style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 20px; TEXT-INDENT: 20px; WIDTH: 65%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
+    <DIV style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 0px; TEXT-INDENT: 20px; WIDTH: 55%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
         id=ctl00_lbltitle class=title>ユーザー検索</SPAN>
     </DIV>
-    <DIV style="TEXT-ALIGN: left; MARGIN-TOP: 20px; WIDTH: 30%; FLOAT: right; HEIGHT: 50px">
+    <DIV style="TEXT-ALIGN: left; MARGIN-TOP: 0px; WIDTH: 30%; FLOAT: right; HEIGHT: 50px">
         <DIV style="WIDTH: 354px" id=ctl00_panelMsg class=panelGrid>
            <FIELDSET>
                <LEGEND>システム情報 </LEGEND>&nbsp; 

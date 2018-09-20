@@ -7,6 +7,7 @@
  */
 package com.masago.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserInfoBean {
@@ -23,6 +24,9 @@ public class UserInfoBean {
     private Date createDate;
     private String updateUser;
     private Date updateDate;
+    
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    
 	public String getUserId() {
 		return userId;
 	}
@@ -77,8 +81,9 @@ public class UserInfoBean {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	public Date getCreateDate() {
-		return createDate;
+	public String getCreateDate() {
+		String dateString = sdf.format(createDate);
+		return dateString;
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -89,8 +94,9 @@ public class UserInfoBean {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
+	public String getUpdateDate() {
+		String dateString = sdf.format(updateDate);
+		return dateString;
 	}
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
