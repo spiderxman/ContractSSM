@@ -10,11 +10,11 @@ function getNow(objId) {
     setTimeout("getNow("+objId+")", 1000);
 }
 
-function logout() {
+function logout(value) {
 	if(!confirm("ログアウトしますか?")){
 		return false;
 	}
-	var form = document.getElementById("mainForm");
+	var form = document.getElementById(value);
 	form.submit();
 	return true;
 }
@@ -71,6 +71,17 @@ function sameErrChk(value1, value2){
 //半角英数以外あり：true
 function halfAlphaNumChk(value){
 	if(value.match("^[0-9a-zA-Z]+$")){
+		return false;
+	}
+	return true;
+}
+
+//メールチェック
+//return
+//全て半角英数　　：false
+//半角英数以外あり：true
+function mailChk(value){
+	if(!value.match("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$")){
 		return false;
 	}
 	return true;

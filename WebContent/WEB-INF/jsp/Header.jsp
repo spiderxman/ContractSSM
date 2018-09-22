@@ -26,6 +26,9 @@
     	if(menu == 'userSearch'){
     		form.action = "UserSearchInit";
     	}
+    	if(menu == 'userAdd'){
+    		form.action = "UserAddInit";
+    	}
     	form.submit();
     }
 
@@ -39,7 +42,7 @@
             <DIV class=UserNotice>
                 <DIV style="WIDTH: 50%; FLOAT: left">
                     <SPAN id=ctl00_lblUserID>ユーザー名：</SPAN><SPAN id=ctl00_lblUserName>
-                   ${userName}
+                   ${sessionScope.userInfo.userName}
                    </SPAN> &nbsp; <SPAN id=ctl00_lblTime></SPAN>
                 </DIV>
                 <DIV style="WIDTH: 50%; FLOAT: left">
@@ -60,6 +63,7 @@
             <li onMouseOver="show('nav_2');" onMouseOut="hide('nav_2')" ><a href="#">基本情報</a>
                 <ul id="nav_2">
                     <li><a href="javascript:void(0);" onClick="menuSwitch('userSearch');">ユーザー検索</a></li>
+                    <li><a href="javascript:void(0);" onClick="menuSwitch('userAdd');">ユーザー追加</a></li>
                 </ul>
             </li>
             <li onMouseOver="show('nav_3');" onMouseOut="hide('nav_3')" ><a href="#">マスタ情報</a>
@@ -77,6 +81,16 @@
             <li class="yy"></li>
         </ul>
     </div>
+    <DIV style="TEXT-ALIGN: left; MARGIN-TOP: 0px; WIDTH: 30%; FLOAT: right; HEIGHT: 20px">
+        <DIV style="WIDTH: 354px; HEIGHT: 40px" id=ctl00_panelMsg class=panelGrid>
+           <FIELDSET>
+               <LEGEND>システム情報 </LEGEND>&nbsp; 
+               <SPAN
+                  style="COLOR: red" id=errorMessage class=MsgStyle>${errorMessage}
+               </SPAN>
+           </FIELDSET>
+        </DIV>
+    </DIV>
 </DIV>
 </form>
 </body>

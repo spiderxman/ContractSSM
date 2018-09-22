@@ -59,22 +59,12 @@
 </head>
 <BODY>
 <DIV style="WIDTH: 1158px; HEIGHT: 150px">
-<jsp:include page="Header.jsp"/>
+<jsp:include page="../Header.jsp"/>
 </DIV>
 <FORM id="userSearchForm" style="TEXT-ALIGN: center" method=post action="UserSearch">
 <DIV style="WIDTH: 1158px; HEIGHT: 30px">
     <DIV style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 0px; TEXT-INDENT: 20px; WIDTH: 55%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
         id=ctl00_lbltitle class=title>ユーザー検索</SPAN>
-    </DIV>
-    <DIV style="TEXT-ALIGN: left; MARGIN-TOP: 0px; WIDTH: 30%; FLOAT: right; HEIGHT: 50px">
-        <DIV style="WIDTH: 354px" id=ctl00_panelMsg class=panelGrid>
-           <FIELDSET>
-               <LEGEND>システム情報 </LEGEND>&nbsp; 
-               <SPAN
-                  style="COLOR: red" id=ctl00_lblErrorMessage class=MsgStyle>
-               </SPAN>
-           </FIELDSET>
-        </DIV>
     </DIV>
 </DIV>
 <DIV style="TEXT-ALIGN: left; WIDTH: 1158px">
@@ -108,13 +98,15 @@
                 <INPUT id=delFlag name=delFlag type=checkbox>
                     <LABEL for=ctl00_mainContent_chkVisible>削除フラグ含む</LABEL></SPAN>
                 </TD>
+                <td>
+                	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="userSearch();">検索</a>
+                </td>
             </TR>
         </TBODY>
     </TABLE>
 </DIV>
 <DIV style="TEXT-ALIGN: center; WIDTH: 100%;">
-	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="userSearch();">検索</a>
-	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="">追加</a>
+	 ページ情報 
 </DIV>
 
 <!-- ユーザ検索結果一覧 -->
@@ -183,6 +175,6 @@
 </DIV>
 </FORM>
 <!-- フッター -->
-<jsp:include page="Footer.jsp"/>
+<jsp:include page="../Footer.jsp"/>
 </BODY>
 </HTML>

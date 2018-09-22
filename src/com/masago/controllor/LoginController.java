@@ -13,14 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.masago.bean.UserInfoBean;
-import com.masago.service.GetUserInfoService;
+import com.masago.service.UserInfoService;
 
 @Controller
 public class LoginController {    //用户控制器
 
     @Autowired
-    @Qualifier("GetUserInfoService")
-    private GetUserInfoService getUserInfoService; //注意业务层
+    @Qualifier("UserInfoService")
+    private UserInfoService userInfoService; //注意业务层
 
     @RequestMapping("/Login")  //处理login请求
     public ModelAndView login(String userId, String password, String req_gid, ModelAndView mv, HttpSession session){
@@ -29,7 +29,7 @@ public class LoginController {    //用户控制器
     		mv.setViewName("Login"); //重新设置view视图页面
     		return mv; //返回视图
     	}
-    	List<UserInfoBean> userInfoList = getUserInfoService.getUserInfo(userId,null,null,null); //调用业务层方法返回一个实例对象
+    	List<UserInfoBean> userInfoList = userInfoService.getUserInfo(userId,null,null,null); //调用业务层方法返回一个实例对象
 
         if (userInfoList!=null&&userInfoList.size()>0) {  //判断查到的数据是否为空
             //如果用户不为空，设在Session域中

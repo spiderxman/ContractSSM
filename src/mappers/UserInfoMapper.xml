@@ -60,4 +60,26 @@
   	<include refid="searchBy"/>
   	order by user_id asc
   </select>
+  
+  <insert id="insertUserInfo" parameterType="com.masago.bean.UserInfoBean">
+	insert into tb_tr_user_info(
+	<include refid="Base_Column_List"/>
+	)
+	values(
+	#{userInfo.userId},
+	#{userInfo.userName},
+	#{userInfo.password},
+	#{userInfo.telNumber},
+	#{userInfo.mailAddress},
+	#{userInfo.authorityCd},
+	#{userInfo.memo},
+	'0',
+	<!-- #{userInfo.createUser}, -->
+	'tang',
+	sysdate(),
+	<!-- #{userInfo.updateUser}, -->
+	'tang',
+	sysdate()
+	)
+  </insert>
 </mapper>

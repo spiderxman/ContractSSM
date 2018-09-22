@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.masago.bean.UserInfoBean;
-import com.masago.service.GetUserInfoService;
+import com.masago.service.UserInfoService;
 
 @Controller
 public class MainMenuController {    //用户控制器

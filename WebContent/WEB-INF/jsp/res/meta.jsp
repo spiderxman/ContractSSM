@@ -12,3 +12,4 @@
 <link rel="stylesheet" href="./css/Index.css" type="text/css" />
 <link rel="stylesheet" href="./css/Style.css" type="text/css" />
 <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="./css/global.css" type="text/css" />
