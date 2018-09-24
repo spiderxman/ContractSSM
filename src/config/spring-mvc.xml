@@ -18,7 +18,13 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- 启动注解驱动的spring MVC功能,注册请求url和注解POJO类方法的映射-->
-       <mvc:annotation-driven />
+    <mvc:annotation-driven>
+		<mvc:message-converters>
+			<!-- JSON解析用-->
+        	<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+        	<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
     <!-- 对模型视图名称的解析,在请求时模型视图名称添加前后缀 -->
     <context:component-scan base-package="com.masago" />
 
@@ -32,8 +38,7 @@
     <mvc:resources mapping="/js/**" location="/js/" />
     <mvc:resources mapping="/css/**" location="/css/" />
     <mvc:resources mapping="/Image/**" location="/Image/" />
-    <mvc:resources mapping="/bootstrap-3.3.7-dist/js/**" location="/bootstrap-3.3.7-dist/js/" />
-    <mvc:resources mapping="/bootstrap-3.3.7-dist/css/**" location="/bootstrap-3.3.7-dist/css/" />
+    <mvc:resources mapping="/fonts/**" location="/fonts/" />
     <!--登陆拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>

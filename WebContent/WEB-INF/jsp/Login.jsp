@@ -19,14 +19,14 @@
 		 }
  
  function inputCheck(){
-	 var userId = document.getElementById("txtUserId").value;
-	 var password = document.getElementById("txtPassword").value;
+	 var userId = document.getElementById("userId").value;
+	 var password = document.getElementById("password").value;
 	 if(userId==null||userId==''){
-		 document.getElementById("msg").innerHTML = "用户名不能为空";
+		 document.getElementById("msg").innerHTML = "ユーザ名入力されていない";
 		 return false;
 	 }
 	 if(password==null||password==''){
-		 document.getElementById("msg").innerHTML = "密码不能为空";
+		 document.getElementById("msg").innerHTML = "パスワード入力されていない";
 		 return false;
 	 }
 	 return true;
@@ -50,7 +50,7 @@
 	        <DIV style="POSITION: absolute; MARGIN-TOP: 32px; WIDTH: 120px; FLOAT: left; left: 9px; top: 4px;">
 	        	<SPAN style="DISPLAY: inline-block; HEIGHT: 17px" id=lblUserId class=login-lbl>ユーザーID</SPAN> </DIV>
 	        <DIV style="MARGIN-TOP: 30px; WIDTH: 250px; FLOAT: right">
-	          <INPUT id=txtUserId name=userId style="BORDER-BOTTOM: #e4e4e4 1px solid; BORDER-LEFT: #e4e4e4 1px solid; 
+	          <INPUT id=userId name=userId style="BORDER-BOTTOM: #e4e4e4 1px solid; BORDER-LEFT: #e4e4e4 1px solid; 
 	          BACKGROUND-COLOR: #f7f7f7; WIDTH: 179px; BORDER-TOP: #e4e4e4 1px solid; BORDER-RIGHT: #e4e4e4 1px solid">
 	        </DIV>
 	      </DIV>
@@ -58,7 +58,7 @@
 	   		<DIV style="POSITION: absolute; MARGIN-TOP: 20px; WIDTH: 120px; FLOAT: left; left: 10px; top: 54px;">
 	   		<SPAN style="DISPLAY: inline-block; HEIGHT: 20px" id=lblPassword class=login-lbl>パスワード</SPAN> </DIV>
 		        <DIV style="MARGIN-TOP: 15px; WIDTH: 250px; FLOAT: right">
-		          <INPUT id=txtPassword name=password style="BORDER-BOTTOM: #e4e4e4 1px solid; BORDER-LEFT: #e4e4e4 1px solid; 
+		          <INPUT id=password name=password style="BORDER-BOTTOM: #e4e4e4 1px solid; BORDER-LEFT: #e4e4e4 1px solid; 
 		          BACKGROUND-COLOR: #f7f7f7; WIDTH: 179px; BORDER-TOP: #e4e4e4 1px solid; 
 		          BORDER-RIGHT: #e4e4e4 1px solid" type=password>
 		        </DIV>

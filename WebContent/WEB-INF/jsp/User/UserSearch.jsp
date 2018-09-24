@@ -6,62 +6,96 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザ検索</title>
 <SCRIPT language=javascript type=text/javascript>
-    var timeClient = new Date();
-
     function openHelpDoc() {
         window.open('Help/List.htm', 'newwindow', 'width=800,height=700,scrollbars=yes,resizable=yes,location=yes');
         return false;
     }
-    function show(id){
-        document.getElementById(id).style.display='block';
-    }
-    function hide(id){
-        document.getElementById(id).style.display='none';
-    }
-
     
-    var timeClient = new Date();
-    function getTimeSub() {
-        var strTimeServer;
-        var timeServer;
-        if (document.getElementById('ctl00_hidTime') != null) {
-            strTimeServer = document.getElementById('ctl00_hidTime').value;
-            timeServer = new Date(strTimeServer);
-        }
-        var timeSub = Math.round((timeServer.getTime() - timeClient.getTime()) / 1000);
-        return timeSub;
-    }
-    function getTime(n) {
-        var clientTime = new Date();
-        clientTime.setTime(clientTime.getTime() + n * 1000);
-        var nowTime = clientTime.toLocaleDateString() + " " + clientTime.toLocaleTimeString();
-        if (document.getElementById('ctl00_lblTime') != null) {
-            document.getElementById('ctl00_lblTime').innerText = nowTime;
-        }
-        setTimeout("getTime(getTimeSub())", 1000);
-    }
     function openHelpDoc() {
         window.open('Help/List.htm', 'newwindow', 'width=800,height=700,scrollbars=yes,resizable=yes,location=yes');
         return false;
     }
-    function show(id){
-        document.getElementById(id).style.display='block';
-    }
-    function hide(id){
-        document.getElementById(id).style.display='none';
-    }
-    
     function userSearch(){
     	var form = document.getElementById("userSearchForm");
     	form.submit();
     }
+    function userSearchByAjax() {
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            //contentType: "application/json",//post请求的信息格式（添加此句后台取不到request值）
+            url: "UserSearchByAjax" ,//url
+            data: $("#userSearchForm").serialize(),
+            success: function (data) {
+            	var str = '<TABLE style="WIDTH: 100%; BORDER-COLLAPSE: collapse" id=ctl00_mainContent_gvList border=1 rules=all cellSpacing=0 cellPadding=0 class="table table-hover">';
+            	str = str + '<TBODY>';
+            	str = str + headerStr();
+            	for(var i=0;i<data.length;i++){
+            		str = str + '<TR onclick="if(window.oldtr!=null){window.oldtr.runtimeStyle.cssText="";}this.runtimeStyle.cssText="background-color:#CCCCFF";window.oldtr=this;">';
+            		str = str + '<TD style="WIDTH: 8%" align=center><A id=ctl00_mainContent_gvList_ctl02_lnkEdit href="UserUpdate.htm">編集</A></TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=center><A style="TEXT-DECORATION: underline" id=ctl00_mainContent_gvList_ctl02_lnkUserID href="UserDetail.htm">'+data[i].userId+'</A></TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=left>'+data[i].userName+'</TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=left>'+data[i].authorityCd+'</TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=center><SPAN title=削除フラグ disabled><INPUT id=delFlag name=delFlag type=checkbox></SPAN></TD>';
+            		str = str + '<TD style="WIDTH: 14%" align=left>'+data[i].telNumber+'</TD>';
+            		str = str + '<TD style="WIDTH: 14%" align=left>'+data[i].mailAddress+'</TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=left>'+data[i].createUser+'</TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=left>'+data[i].createDate+'</TD>';
+            		str = str + '<TD style="WIDTH: 8%" align=left>'+data[i].updateUser+'</TD>';
+            		str = str + '<TD align=left>'+data[i].updateDate+'</TD>';
+            		str = str + '</TR>';
+           		}
+            	str = str + '</TBODY>';
+            	str = str + '</TABLE>';
+            	$("#searchResult").html("");
+            	$("#searchResult").append(str);
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                $("#errorMessage").html("異常:("+XMLHttpRequest.status+")");
+            }
+        });
+    }
+    
+    function headerStr(){
+    	var str = "";
+    	str = str + '        <TR class=gvHeader>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col>操作</TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$ユーザID")">ユーザID</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$ユーザー名")">ユーザー名</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$権限")">権限</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$削除状態")">削除フラグ</A></TH>';
+    	str = str + '            <TH style="WIDTH: 14%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$電話番号")">電話番号</A></TH>';
+    	str = str + '            <TH style="WIDTH: 14%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$メールアドレス")">メールアドレス</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$作成者")">作成者</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$作成日")">作成日</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$更新者")">更新者</A></TH>';
+    	str = str + '            <TH style="WIDTH: 8%" scope=col><A href="javascript:__doPostBack("ctl00$mainContent$gvList","Sort$更新日")">更新日</A></TH>';
+    	str = str + '        </TR>';
+    	return str;
+    }
+    
+//    $("#btn").click(function()
+    function userSearch_AJAX1() {
+    	$.ajax({
+    		data:{"data":$("#userId").val()},
+    		type: "POST",//方法类型
+            url: "AJAXTEST" ,//url
+            success: function (msg) {
+                alert(msg);
+            },
+            error : function(msg) {
+                alert("异常！");
+            }
+    	});
+    }
+//    });
 </SCRIPT>
 </head>
 <BODY>
 <DIV style="WIDTH: 1158px; HEIGHT: 150px">
 <jsp:include page="../Header.jsp"/>
 </DIV>
-<FORM id="userSearchForm" style="TEXT-ALIGN: center" method=post action="UserSearch">
+<FORM id="userSearchForm" style="TEXT-ALIGN: center" method=post action="">
 <DIV style="WIDTH: 1158px; HEIGHT: 30px">
     <DIV style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 0px; TEXT-INDENT: 20px; WIDTH: 55%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
         id=ctl00_lbltitle class=title>ユーザー検索</SPAN>
@@ -99,7 +133,7 @@
                     <LABEL for=ctl00_mainContent_chkVisible>削除フラグ含む</LABEL></SPAN>
                 </TD>
                 <td>
-                	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="userSearch();">検索</a>
+                	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="userSearchByAjax();">検索</a>
                 </td>
             </TR>
         </TBODY>
@@ -109,8 +143,8 @@
 	 ページ情報 
 </DIV>
 
-<!-- ユーザ検索結果一覧 -->
-<DIV style="HEIGHT: 400px" class=gvContent>
+<!-- ユーザ検索結果一覧 通常やりかた-->
+<%-- <DIV style="HEIGHT: 400px" class=gvContent>
 <c:if test="${userInfoList.size() > 0}">
 <DIV>
 <TABLE style="WIDTH: 100%; BORDER-COLLAPSE: collapse"
@@ -169,6 +203,12 @@
 </TABLE>
 </DIV>
 </c:if>
+</DIV> --%>
+
+<!-- ユーザ検索結果一覧AJAXで実現 -->
+<DIV style="HEIGHT: 400px" class=gvContent>
+<DIV id="searchResult">
+</DIV>
 </DIV>
 
 <INPUT id=ctl00_hidTime name=ctl00$hidTime value=2014/02/17 15:08:36 type=hidden />
