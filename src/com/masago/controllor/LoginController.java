@@ -13,11 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.masago.bean.UserInfoBean;
+import com.masago.common.PropertyUtil;
 import com.masago.service.UserInfoService;
 
 @Controller
 public class LoginController {    //用户控制器
 
+	//共通クラス
+	PropertyUtil util = null;
+	
     @Autowired
     @Qualifier("UserInfoService")
     private UserInfoService userInfoService; //注意业务层
@@ -43,7 +47,7 @@ public class LoginController {    //用户控制器
 //                mv.setViewName("MainMenu");
 			}else{
 				//パスワードの不一致
-				mv.addObject("message","密码错误");
+				mv.addObject("message",util.getProperty("MSG_E001"));
 	            mv.setViewName("Login"); //重新设置view视图页面
 			}
         }else {

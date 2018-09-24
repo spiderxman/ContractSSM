@@ -159,17 +159,18 @@
     	<version>2.9.6</version>
 	</dependency>
 	<!-- JSON用jar End -->
-	
+
+    <!-- log4j-->
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>${log4jVersion}</version>
+	</dependency>
 
 
 
-        <!-- log4j配置, 视情况添加-->
-        <!-- <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4jVersion}</version>
-        </dependency>
-        <dependency>
+
+        <!--<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4jVersion}</version>

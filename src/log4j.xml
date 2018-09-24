@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+<appender name="FILEOUT" class="org.apache.log4j.RollingFileAppender">
+  <param name="Append" value="true" />
+  <param name="Threshold" value="ERROR" />
+  <param name="MaxBackupIndex" value="5" /> <!-- ← ローテーション世代数 -->
+  <param name="File" value="..\contractssm.log" />
+  <param name="MaxFileSize" value="5MB" /> <!-- ← ローテーションを行うサイズ -->
+  <param name="Encoding" value="utf8"/>
+  <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern"
+           value="%d [%-5p] %t %c %x %F %M(%L) - %m%n" />
+  </layout>
+</appender>
+
+<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+  <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern"
+           value="%d [%-5p] %t %x %F %M(%L) - %m%n" />
+  </layout>
+</appender>
+
+<!-- 通常ログのカテゴリ -->
+<category name="com.masago.common.CmnLogger">
+ <appender-ref ref="FILEOUT"/>
+</category>
+
+<root>
+  <priority value="ERROR" />
+  <appender-ref ref="STDOUT" />
+</root>
+
+</log4j:configuration>
