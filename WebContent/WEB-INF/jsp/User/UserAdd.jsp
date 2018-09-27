@@ -50,8 +50,9 @@ function userAdd(){
 		$("#errorMessage").html("電話番号が数字ではない");
 		return;
 	}
-	if(mailChk($("#mailAddress").val())){
+	if(!mailChk($("#mailAddress").val())){
 		$("#errorMessage").html("メール形式不正");
+		return;
 	}
 	var form = document.getElementById("userAddForm");
 	form.submit();

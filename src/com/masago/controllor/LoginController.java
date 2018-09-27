@@ -13,18 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.masago.bean.UserInfoBean;
-import com.masago.common.PropertyUtil;
+import com.masago.common.PropertiesFileLoader;
 import com.masago.service.UserInfoService;
 
 @Controller
 public class LoginController {    //用户控制器
-
-	//共通クラス
-	PropertyUtil util = null;
-	
+	private static PropertiesFileLoader propertiesFileLoader;
     @Autowired
     @Qualifier("UserInfoService")
-    private UserInfoService userInfoService; //注意业务层
+    private UserInfoService userInfoService; //业务层
 
     @RequestMapping("/Login")  //处理login请求
     public ModelAndView login(String userId, String password, String req_gid, ModelAndView mv, HttpSession session){
@@ -47,7 +44,7 @@ public class LoginController {    //用户控制器
 //                mv.setViewName("MainMenu");
 			}else{
 				//パスワードの不一致
-				mv.addObject("message",util.getProperty("MSG_E001"));
+				mv.addObject("message", getConfig("MSG_E001"));
 	            mv.setViewName("Login"); //重新设置view视图页面
 			}
         }else {
@@ -56,5 +53,14 @@ public class LoginController {    //用户控制器
         }
         return mv; //返回视图
     }
+
+
+	/** * 获取配置 */
+	public static String getConfig(String key) {
+		if (propertiesFileLoader == null) {
+			propertiesFileLoader = new PropertiesFileLoader("config/messages.properties");
+		}
+		return propertiesFileLoader.getProperty(key);
+	}
 
 }
