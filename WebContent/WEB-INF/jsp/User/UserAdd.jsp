@@ -57,6 +57,30 @@ function userAdd(){
 	var form = document.getElementById("userAddForm");
 	form.submit();
 }
+
+function userIdExists() {
+	if($("#userId").val()==""){
+		return;
+	}
+	var param = {"userId":$("#userId").val()};
+	$("#errorMessage").html("");
+    $.ajax({
+        type: "POST",//方法类型
+        dataType: "json",//预期服务器返回的数据类型
+        //contentType: "application/json",//post请求的信息格式（添加此句后台取不到request值）
+        url: "CheckUserIdExists" ,//url
+        data: param,
+        success: function (resultList) {
+        	if(resultList && resultList.length > 0){
+        		$("#errorMessage").html("ユーザIDすでに存在している。");
+        		return;
+        	}
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+            $("#errorMessage").html("異常:("+XMLHttpRequest.status+")");
+        }
+    });
+}
 </SCRIPT>
 </HEAD>
 <BODY>
@@ -84,7 +108,7 @@ function userAdd(){
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblUserCode
                 class=labelBld>ユーザーID</SPAN><BR>
             <INPUT style="WIDTH: 120px" id="userId"
-                class=inputText name="userId" maxLength=10　value="${userInfo.userId}"></TD>
+                class="inputText" name="userId" maxLength="10" value="${userInfo.userId}" onblur="userIdExists()" placeholder="例）abc"></TD>
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblUserName
                 class=labelBld>ユーザー名</SPAN><BR>
             <INPUT style="WIDTH: 120px" id="userName"
@@ -103,7 +127,7 @@ function userAdd(){
         <TR>
             <TD colSpan=2><SPAN id=ctl00_mainContent_lblPhone class=inputlbl>電話番号</SPAN><BR>
             <INPUT style="WIDTH: 300px" id="telNumber"
-                class=inputText name="telNumber" maxLength=15　value="${userInfo.telNumber}"></TD>
+                class=inputText name="telNumber" maxLength=15 value="${userInfo.telNumber}"></TD>
             <TD colSpan=2><SPAN id=ctl00_mainContent_lblEmail class=inputlbl>メールアドレス</SPAN><BR>
             <INPUT style="WIDTH: 300px" id="mailAddress"
                 class=inputText name="mailAddress" maxLength=50 value="${userInfo.mailAddress}"></TD>

@@ -18,7 +18,6 @@ import com.masago.service.UserInfoService;
 
 @Controller
 public class LoginController {    //用户控制器
-	private static PropertiesFileLoader propertiesFileLoader;
     @Autowired
     @Qualifier("UserInfoService")
     private UserInfoService userInfoService; //业务层
@@ -44,7 +43,7 @@ public class LoginController {    //用户控制器
 //                mv.setViewName("MainMenu");
 			}else{
 				//パスワードの不一致
-				mv.addObject("message", getConfig("MSG_E001"));
+				mv.addObject("message", PropertiesFileLoader.getProperty("MSG_E001"));
 	            mv.setViewName("Login"); //重新设置view视图页面
 			}
         }else {
@@ -53,14 +52,4 @@ public class LoginController {    //用户控制器
         }
         return mv; //返回视图
     }
-
-
-	/** * 获取配置 */
-	public static String getConfig(String key) {
-		if (propertiesFileLoader == null) {
-			propertiesFileLoader = new PropertiesFileLoader("config/messages.properties");
-		}
-		return propertiesFileLoader.getProperty(key);
-	}
-
 }

@@ -583,3 +583,23 @@ SELECT {
 .gvFix_Data {
 	WIDTH: 100%; OVERFLOW: auto
 }
+
+#btnLogin {
+    display: block;
+    margin: 10px auto 0;
+    width: 100%;
+    height: 60px;
+    color: #000;
+    background: #C0C0C0;
+    border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	-o-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	-ms-box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+#btnLogin:hover {
+	background: #808080;
+}

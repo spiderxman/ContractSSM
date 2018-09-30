@@ -22,11 +22,11 @@
 	 var userId = document.getElementById("userId").value;
 	 var password = document.getElementById("password").value;
 	 if(userId==null||userId==''){
-		 document.getElementById("msg").innerHTML = "ユーザ名入力されていない";
+		 document.getElementById("lblErrorMessage").innerHTML = "ユーザ名入力されていない";
 		 return false;
 	 }
 	 if(password==null||password==''){
-		 document.getElementById("msg").innerHTML = "パスワード入力されていない";
+		 document.getElementById("lblErrorMessage").innerHTML = "パスワード入力されていない";
 		 return false;
 	 }
 	 return true;
@@ -39,8 +39,7 @@
 	      <DIV style="WIDTH: 325px; HEIGHT: 40px" id=SystemMessage class=panelGrid>
 	        <FIELDSET>
 		        <LEGEND>システム情報 </LEGEND>
-		            
-		        	<SPAN style="COLOR: red" id=lblErrorMessage class=MsgStyle></SPAN>
+		        	<SPAN style="COLOR: red" id=lblErrorMessage class=MsgStyle>${message}</SPAN>
 		        </FIELDSET>
 	      </DIV>
 	   </DIV>
@@ -63,11 +62,8 @@
 		          BORDER-RIGHT: #e4e4e4 1px solid" type=password>
 		        </DIV>
 	      	</DIV>
-	      	<div id="msg" style="width: 100%;text-align:center;font-family:verdana;font-size:16px;color:#FF0000">
-	      		${message}
-	      	</div>
-	      	<DIV style="WIDTH: 100%; HEIGHT: 50px">
-		        <DIV style="POSITION: absolute; MARGIN-TOP: 15px; WIDTH: 160px; FLOAT: left">
+	      	<DIV style="width:100%; height:50px;text-align:center">
+<!-- 		        <DIV style="POSITION: absolute; MARGIN-TOP: 15px; WIDTH: 160px; FLOAT: left">
 		        	<A href="javascript:void(0);" id="idsubmit" onclick="submit()">
 		        	<img src="Image/login-dl.gif" style="BORDER-RIGHT-WIDTH: 0px; FLOAT: right; 
 		        	BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px" /> </A>
@@ -75,7 +71,8 @@
 		        <DIV style="MARGIN-TOP: 15px; WIDTH: 160px; FLOAT: right">
 		          <A href="javascript:void(0);" id="idreset" onclick="reset()"><img style="BORDER-RIGHT-WIDTH: 0px; 
 		          BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px" id=btnCancel name=btnCancel src="Image/login-qx.gif"/></A>
-		        </DIV>
+		        </DIV> -->
+		        <button id="btnLogin" class="btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="width:65%;height:50px">ログイン</button>
 	    	</DIV>
 	    </DIV>
 	    <input type="hidden" id="req_gid" name="req_gid" value="loaded"/>

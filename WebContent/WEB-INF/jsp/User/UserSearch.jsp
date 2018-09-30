@@ -19,6 +19,7 @@
     	var form = document.getElementById("userSearchForm");
     	form.submit();
     }
+    /*
     function userSearchByAjax() {
         $.ajax({
             type: "POST",//方法类型
@@ -55,7 +56,6 @@
             }
         });
     }
-    
     function headerStr(){
     	var str = "";
     	str = str + '        <TR class=gvHeader>';
@@ -73,22 +73,65 @@
     	str = str + '        </TR>';
     	return str;
     }
-    
-//    $("#btn").click(function()
-    function userSearch_AJAX1() {
-    	$.ajax({
-    		data:{"data":$("#userId").val()},
-    		type: "POST",//方法类型
-            url: "AJAXTEST" ,//url
-            success: function (msg) {
-                alert(msg);
+    */
+    function userSearchByAjax() {
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            //contentType: "application/json",//post请求的信息格式（添加此句后台取不到request值）
+            url: "UserSearchByAjax" ,//url
+            data: $("#userSearchForm").serialize(),
+            success: function (result) {
+            	setResult(result);
             },
-            error : function(msg) {
-                alert("异常！");
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                $("#errorMessage").html("異常:("+XMLHttpRequest.status+")");
             }
-    	});
+        });
     }
-//    });
+    function setResult(resultList){
+    	/*
+    	for(var i=0;i<resultList.length;i++){
+    		var edit = $("<td></td>").append("編集");
+    		var userId = $("<td></td>").append(resultList[i].userId);
+    		$("<tr></tr>").append(edit)
+    		.append(userId)
+    		.appendTo("#tblUserList tbody");
+    		
+    	}
+    	*/
+    	$("#tblUserList tbody").html("");
+    	$.each(resultList, function(index, result){
+    		var editLink = $("<a></a>").attr("href","UserUpdate.htm").append("編集");
+    		var edit = $("<td></td>").attr("align","center").append(editLink);
+    		var userIdLink = $("<a></a>").attr("href","UserDetail.htm").css("text-decoration","underline").append(result.userId);
+    		var userId = $("<td></td>").attr("align","center").append(userIdLink);
+    		var userName = $("<td></td>").append(result.userName);
+    		var authorityCd = $("<td></td>").append(result.authorityCd);
+    		var delFlagSpan = $("<span></span>").attr("title","削除フラグ");
+    		var delFlagInput = $("<input></input>").attr({"id":"delFlag", "name":"delFlag", "type":"checkbox"});
+    		var delFlag = $("<td></td>").attr("align","center").append(delFlagSpan.append(delFlagInput));
+    		var telNumber = $("<td></td>").append(result.telNumber);
+    		var mailAddress = $("<td></td>").append(result.mailAddress);
+    		var createUser = $("<td></td>").append(result.createUser);
+    		var createDate = $("<td></td>").append(result.createDate);
+    		var updateUser = $("<td></td>").append(result.updateUser);
+    		var updateDate = $("<td></td>").append(result.updateDate);
+    		$("<tr></tr>").append(edit)
+    		.append(userId)
+    		.append(userName)
+    		.append(authorityCd)
+    		.append(delFlag)
+    		.append(telNumber)
+    		.append(mailAddress)
+    		.append(createUser)
+    		.append(createDate)
+    		.append(updateUser)
+    		.append(updateDate)
+    		.appendTo("#tblUserList tbody");
+    	});
+    	
+    }
 </SCRIPT>
 </head>
 <BODY>
@@ -119,14 +162,13 @@
                     name="userName" maxLength=20></TD>
                 <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblAcessGrp
                     class=inputlbl>権限</SPAN><BR>
-                <SELECT id=ctl00_mainContent_ddlAcessGrp class=ddlBlack
-                    name="userRoot">
-                    <OPTION selected value=""></OPTION>
-                    <OPTION value=admin>admin</OPTION>
-                    <OPTION value=DEQXZ>事務担当者</OPTION>
-                    <OPTION value=XSCG>販売担当者</OPTION>
-                    <OPTION value=ZJL>総経理</OPTION>
-                </SELECT></TD>
+                <SELECT id="authorityCd" class=ddlBlack
+                	name="authorityCd">
+                	<OPTION selected value=""></OPTION>
+					<c:forEach var="authInfo" items="${mstAuthorityList}">
+						<OPTION value="${authInfo.authorityCd}">${authInfo.authorityName}</OPTION>
+					</c:forEach>
+            	</SELECT></TD>
                 <TD><BR>
                 <SPAN style="WIDTH: 133px; DISPLAY: inline-block" class=chkBox>
                 <INPUT id=delFlag name=delFlag type=checkbox>
@@ -208,6 +250,37 @@
 <!-- ユーザ検索結果一覧AJAXで実現 -->
 <DIV style="HEIGHT: 400px" class=gvContent>
 <DIV id="searchResult">
+	<TABLE style="WIDTH: 100%; BORDER-COLLAPSE: collapse"
+    id=tblUserList border=1 rules=all cellSpacing=0
+    cellPadding=0 class="table table-hover">
+    <thead>
+    	<TR class=gvHeader>
+            <TH style="WIDTH: 8%" scope=col align="center">操作</TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$ユーザID')">ユーザID</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$ユーザー名')">ユーザー名</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$権限')">権限</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$削除状態')">削除フラグ</A></TH>
+            <TH style="WIDTH: 14%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$電話番号')">電話番号</A></TH>
+            <TH style="WIDTH: 14%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$メールアドレス')">メールアドレス</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$作成者')">作成者</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$作成日')">作成日</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$更新者')">更新者</A></TH>
+            <TH style="WIDTH: 8%" scope=col><A
+                href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$更新日')">更新日</A></TH>
+        </TR>
+    </thead>
+    <TBODY>
+    </TBODY>
+    </TABLE>
 </DIV>
 </DIV>
 

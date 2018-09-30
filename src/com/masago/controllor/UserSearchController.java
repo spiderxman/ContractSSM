@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.masago.bean.MstAuthorityBean;
 import com.masago.bean.UserInfoBean;
+import com.masago.service.MstInfoService;
 import com.masago.service.UserInfoService;
 
 import net.sf.json.JSONArray;
@@ -24,11 +26,17 @@ public class UserSearchController {    //用户控制器
 
     @Autowired
     @Qualifier("UserInfoService")
-    private UserInfoService userInfoService; //注意业务层
+    private UserInfoService userInfoService;
+    
+    @Autowired
+    private MstInfoService mstInfoService; //权限表数据取得
 
     @RequestMapping("/UserSearchInit")  //初期表示
     public ModelAndView init(HttpSession session){
     	ModelAndView mv = new ModelAndView();
+    	
+    	List<MstAuthorityBean> mstAuthorityList = mstInfoService.getMstAuthorityInfo(null);
+    	mv.addObject("mstAuthorityList", mstAuthorityList);
         mv.setViewName("User/UserSearch"); //重新设置view视图页面
         return mv; //返回视图
     }
@@ -68,17 +76,6 @@ public class UserSearchController {    //用户控制器
     	}
     	List<UserInfoBean> userInfoList = userInfoService.getUserInfo(userId, userName, userRoot, delFlag);
     	JSONArray jsonArray = JSONArray.fromObject(userInfoList);
-//        mv.setViewName("User/UserSearch"); //重新设置view视图页面
         return jsonArray; //返回视图
     }
-    
-    @RequestMapping(value="/AJAXTEST",method= {RequestMethod.POST})  //初期表示
-    @ResponseBody
-    public ModelAndView AJAX(HttpServletRequest request, HttpServletResponse response){
-    	ModelAndView mv = new ModelAndView();
-    	String data = request.getParameter("data");
-        return mv; //返回视图
-    }
-
-
 }
