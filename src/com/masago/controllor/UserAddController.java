@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.masago.bean.MstAuthorityBean;
 import com.masago.bean.UserInfoBean;
+import com.masago.common.PropertiesFileLoader;
 import com.masago.service.MstInfoService;
 import com.masago.service.UserInfoService;
 
@@ -27,33 +28,43 @@ public class UserAddController {
     private UserInfoService userInfoService;
     
     @Autowired
-    private MstInfoService mstInfoService; //权限表数据取得
+    private MstInfoService mstInfoService; //権限取得
 
-    @RequestMapping("/UserAddInit")  //初期表示
+    /**
+     * 初期表示
+     * @param mv
+     * @param msg
+     * @return
+     */
+    @RequestMapping("/UserAddInit")
     public ModelAndView userAddInit(ModelAndView mv, @ModelAttribute("errorMessage") String msg){
-//    	ModelAndView mv = new ModelAndView();
     	UserInfoBean userInfo = new UserInfoBean();
-    	
+    	//権限取得
     	List<MstAuthorityBean> mstAuthorityList = mstInfoService.getMstAuthorityInfo(null);
-
     	mv.addObject("userInfo", userInfo);
     	mv.addObject("mstAuthorityList", mstAuthorityList);
         mv.setViewName("User/UserAdd"); //重新设置view视图页面
-        
         mv.addObject("errorMessage", msg);
-        return mv; //返回视图
+        return mv;
     }
-    
-    @RequestMapping("/UserAdd")  //初期表示
+    /**
+     * ユーザ登録
+     * @param userInfo
+     * @param mv
+     * @return
+     */
+    @RequestMapping("/UserAdd")
     public String userAdd(UserInfoBean userInfo, Model mv){
-//    	ModelAndView mv = new ModelAndView();
     	userInfoService.setUserInfo(userInfo);
-//    	mv.addObject("errorMessage", "ユーザ1件登録しました。");
-    	mv.addAttribute("errorMessage", "ユーザ1件登録しました。");
-//        mv.setViewName("UserAddInit"); //重新设置view视图页面
-        return "redirect:/UserAddInit"; //返回视图
+    	mv.addAttribute("errorMessage", PropertiesFileLoader.getProperty("MSG_E003"));
+        return "redirect:/UserAddInit";
     }
     
+    /**
+     * ユーザ存在チェック
+     * @param userId
+     * @return
+     */
     @RequestMapping(value ="/CheckUserIdExists", method = RequestMethod.POST)
     @ResponseBody
     public JSONArray checkUserIdExists(String userId){

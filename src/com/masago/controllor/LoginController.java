@@ -17,7 +17,7 @@ import com.masago.common.PropertiesFileLoader;
 import com.masago.service.UserInfoService;
 
 @Controller
-public class LoginController {    //用户控制器
+public class LoginController {
     @Autowired
     @Qualifier("UserInfoService")
     private UserInfoService userInfoService; //业务层
@@ -48,7 +48,7 @@ public class LoginController {    //用户控制器
 	            mv.setViewName("Login"); //重新设置view视图页面
 			}
         }else {
-            mv.addObject("message","用户不存在");
+            mv.addObject("message", PropertiesFileLoader.getProperty("MSG_E002"));
             mv.setViewName("Login"); //重新设置view视图页面
         }
         try {

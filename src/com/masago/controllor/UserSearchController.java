@@ -16,13 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.masago.bean.MstAuthorityBean;
 import com.masago.bean.UserInfoBean;
+import com.masago.common.PropertiesFileLoader;
 import com.masago.service.MstInfoService;
 import com.masago.service.UserInfoService;
 
 import net.sf.json.JSONArray;
 
 @Controller
-public class UserSearchController {    //用户控制器
+public class UserSearchController {
 
     @Autowired
     @Qualifier("UserInfoService")
@@ -42,7 +43,7 @@ public class UserSearchController {    //用户控制器
     }
     
     @RequestMapping(value="/UserSearch",method= {RequestMethod.POST})  //初期表示
-    public ModelAndView userSearch(String userId, String userName, String userRoot, String delFlag, HttpSession session){
+    public ModelAndView userSearch(String userId, String userName, String authorityCd, String delFlag, HttpSession session){
     	ModelAndView mv = new ModelAndView();
     	//删除checkbox选中
     	if("on".equals(delFlag)) {
@@ -50,9 +51,9 @@ public class UserSearchController {    //用户控制器
     	}else {
     		delFlag = "0";
     	}
-    	List<UserInfoBean> userInfoList = userInfoService.getUserInfo(userId, userName, userRoot, delFlag);
+    	List<UserInfoBean> userInfoList = userInfoService.getUserInfo(userId, userName, authorityCd, delFlag);
     	if(userInfoList.size()==0) {
-    		mv.addObject("errorMessage","没数据");
+    		mv.addObject("errorMessage", PropertiesFileLoader.getProperty("MSG_E004"));
     	}
     	mv.addObject("userInfoList", userInfoList);
         mv.setViewName("User/UserSearch"); //重新设置view视图页面
@@ -65,7 +66,7 @@ public class UserSearchController {    //用户控制器
    	
     	String userId = request.getParameter("userId");
     	String userName = request.getParameter("userName");
-    	String userRoot = request.getParameter("userRoot");
+    	String userRoot = request.getParameter("authorityCd");
     	String delFlag = request.getParameter("delFlag");
     	
     	//删除checkbox选中

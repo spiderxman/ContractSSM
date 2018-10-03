@@ -24,6 +24,7 @@ public class UserInfoBean {
     private Date createDate;
     private String updateUser;
     private Date updateDate;
+    private String authorityName;
     
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
@@ -101,4 +102,11 @@ public class UserInfoBean {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	public String getAuthorityName() {
+		return authorityName;
+	}
+	public void setAuthorityName(String authorityName) {
+		this.authorityName = authorityName;
+	}
+	
 }

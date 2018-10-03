@@ -101,13 +101,19 @@
     	}
     	*/
     	$("#tblUserList tbody").html("");
+    	$("#errorMessage").html("");
+    	
+    	if(resultList.length == 0){
+    		$("#errorMessage").html("対象データなし。");
+    		return;
+    	}
     	$.each(resultList, function(index, result){
     		var editLink = $("<a></a>").attr("href","UserUpdate.htm").append("編集");
     		var edit = $("<td></td>").attr("align","center").append(editLink);
     		var userIdLink = $("<a></a>").attr("href","UserDetail.htm").css("text-decoration","underline").append(result.userId);
     		var userId = $("<td></td>").attr("align","center").append(userIdLink);
     		var userName = $("<td></td>").append(result.userName);
-    		var authorityCd = $("<td></td>").append(result.authorityCd);
+    		var authorityCd = $("<td></td>").append(result.authorityName);
     		var delFlagSpan = $("<span></span>").attr("title","削除フラグ");
     		var delFlagInput = $("<input></input>").attr({"id":"delFlag", "name":"delFlag", "type":"checkbox"});
     		var delFlag = $("<td></td>").attr("align","center").append(delFlagSpan.append(delFlagInput));
@@ -260,11 +266,11 @@
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$ユーザID')">ユーザID</A></TH>
             <TH style="WIDTH: 8%" scope=col><A
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$ユーザー名')">ユーザー名</A></TH>
-            <TH style="WIDTH: 8%" scope=col><A
+            <TH style="WIDTH: 12%" scope=col><A
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$権限')">権限</A></TH>
             <TH style="WIDTH: 8%" scope=col><A
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$削除状態')">削除フラグ</A></TH>
-            <TH style="WIDTH: 14%" scope=col><A
+            <TH style="WIDTH: 10%" scope=col><A
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$電話番号')">電話番号</A></TH>
             <TH style="WIDTH: 14%" scope=col><A
                 href="javascript:__doPostBack('ctl00$mainContent$gvList','Sort$メールアドレス')">メールアドレス</A></TH>
