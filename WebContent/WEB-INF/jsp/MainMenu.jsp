@@ -21,7 +21,7 @@
 
 </SCRIPT>
 </head>
-<body onload="getNow('ctl00_lblTime');">
+<body>
 <jsp:include page="Header.jsp"/>
     <FORM style="TEXT-ALIGN: center" id=mainForm method=post name=mainForm action="">
         <DIV style="WIDTH: 1158px; HEIGHT: 30px">

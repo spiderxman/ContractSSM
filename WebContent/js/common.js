@@ -5,16 +5,17 @@
 function getNow(objId) {
 	var nowDate = new Date();
     if (document.getElementById(objId) != null) {
-        document.getElementById(objId).innerText = nowDate.toLocaleString();;
+        document.getElementById(objId).innerText = nowDate.toLocaleString();
     }
     setTimeout("getNow("+objId+")", 1000);
 }
 
-function logout(value) {
+function logout() {
 	if(!confirm("ログアウトしますか?")){
 		return false;
 	}
-	var form = document.getElementById(value);
+	var form = document.getElementById("headForm");
+	form.action = "Login";
 	form.submit();
 	return true;
 }
@@ -123,4 +124,7 @@ function enableControl(enable,btnName){
 		document.getElementById(btnName).setAttribute('disabled',true);
 	}
 }
-
+//直近履歴戻る
+function pullBack(){
+	window.history.back(-1);
+}

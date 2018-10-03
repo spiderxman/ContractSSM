@@ -24,14 +24,15 @@ public class LoginController {    //用户控制器
 
     @RequestMapping("/Login")  //处理login请求
     public ModelAndView login(String userId, String password, String req_gid, ModelAndView mv, HttpSession session){
+
     	if(StringUtils.isEmpty(req_gid)) {
     		session.removeAttribute("userInfo");
     		mv.setViewName("Login"); //重新设置view视图页面
     		return mv; //返回视图
     	}
-    	List<UserInfoBean> userInfoList = userInfoService.getUserInfo(userId,null,null,null); //调用业务层方法返回一个实例对象
+    	List<UserInfoBean> userInfoList = userInfoService.getUserInfo(userId, null, null, null); //调用业务层方法返回一个实例对象
 
-        if (userInfoList!=null&&userInfoList.size()>0) {  //判断查到的数据是否为空
+        if (userInfoList != null && userInfoList.size() > 0) {  //判断查到的数据是否为空
             //如果用户不为空，设在Session域中
             //session.setAttribute("user", userInfoBean);
         	UserInfoBean userInfoBean = userInfoList.get(0);
@@ -50,6 +51,12 @@ public class LoginController {    //用户控制器
             mv.addObject("message","用户不存在");
             mv.setViewName("Login"); //重新设置view视图页面
         }
+        try {
+			Thread.sleep(200);
+        }catch(Exception ex) {
+        	//
+        }
+        
         return mv; //返回视图
     }
 }

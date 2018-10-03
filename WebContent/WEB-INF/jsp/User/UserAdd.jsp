@@ -87,7 +87,7 @@ function userIdExists() {
 <DIV style="WIDTH: 1158px; HEIGHT: 150px">
 <jsp:include page="../Header.jsp"/>
 </DIV>
-<FORM id="userAddForm" style="TEXT-ALIGN: center" method=post action="UserAdd">
+<FORM id="userAddForm" style="TEXT-ALIGN: center" method=post action="UserAdd" autocomplete="off">
 <DIV style="WIDTH: 1158px; HEIGHT: 30px">
 <DIV
     style="BACKGROUND-IMAGE: url(./Image/006.jpg); TEXT-ALIGN: left; MARGIN-TOP: 20px; TEXT-INDENT: 20px; WIDTH: 65%; BACKGROUND-REPEAT: no-repeat; FLOAT: left; HEIGHT: 28px"><SPAN
@@ -97,7 +97,7 @@ function userIdExists() {
 
 <DIV style="TEXT-ALIGN: right; WIDTH: 100%" class=btnContent>
 <a class="btn btn-default" href="javascript:void(0);" role="button" onclick="userAdd();">登録</a>
-<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="UserList.htm;">戻る</a>
+<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="pullBack();">戻る</a>
 </DIV>
 <DIV style="WIDTH: 100%" id=ctl00_mainContent_BaseInfo class=panelGrid>
 <FIELDSET><LEGEND>基本情報 </LEGEND>
@@ -108,29 +108,29 @@ function userIdExists() {
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblUserCode
                 class=labelBld>ユーザーID</SPAN><BR>
             <INPUT style="WIDTH: 120px" id="userId"
-                class="inputText" name="userId" maxLength="10" value="${userInfo.userId}" onblur="userIdExists()" placeholder="例）abc"></TD>
+                class="inputText" name="userId" maxLength="10" onblur="userIdExists()" placeholder="例）abc"/></TD>
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblUserName
                 class=labelBld>ユーザー名</SPAN><BR>
             <INPUT style="WIDTH: 120px" id="userName"
-                class=inputText name="userName" maxLength=20 value="${userInfo.userName}"></TD>
+                class=inputText name="userName" maxLength=20/></TD>
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblPassword
                 class=inputlbl>パスワード</SPAN><BR>
             <INPUT style="WIDTH: 120px" id="password"
-                class=inputText name="password" maxLength=20 type=password value="${userInfo.password}">
+                class=inputText name="password" maxLength=20 type=password autocomplete="new-password"/>
             </TD>
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblRPassword
                 class=inputlbl>パスワード確認</SPAN><BR>
             <INPUT style="WIDTH: 120px" id=rPassword
-                class=inputText name="userPasswordMore" maxLength=20 type=password>
+                class=inputText name="userPasswordMore" maxLength=20 type=password autocomplete="new-password"/>
             </TD>
         </TR>
         <TR>
             <TD colSpan=2><SPAN id=ctl00_mainContent_lblPhone class=inputlbl>電話番号</SPAN><BR>
             <INPUT style="WIDTH: 300px" id="telNumber"
-                class=inputText name="telNumber" maxLength=15 value="${userInfo.telNumber}"></TD>
+                class=inputText name="telNumber" maxLength=15/></TD>
             <TD colSpan=2><SPAN id=ctl00_mainContent_lblEmail class=inputlbl>メールアドレス</SPAN><BR>
             <INPUT style="WIDTH: 300px" id="mailAddress"
-                class=inputText name="mailAddress" maxLength=50 value="${userInfo.mailAddress}"></TD>
+                class=inputText name="mailAddress" maxLength=50/></TD>
             <TD style="WIDTH: 170px"><SPAN id=ctl00_mainContent_lblAcessGrp
                 class=inputlbl>権限</SPAN><BR>
             <SELECT id="authorityCd" class=ddlBlack
@@ -146,7 +146,7 @@ function userIdExists() {
             <TD colSpan=3><SPAN id=ctl00_mainContent_lblRemarks
                 class=inputlbl>備考</SPAN><BR>
             <TEXTAREA style="WIDTH: 480px; HEIGHT: 50px"
-                id="memo" class=inputText name="memo" value="${userInfo.memo}"></TEXTAREA>
+                id="memo" class=inputText name="memo"></TEXTAREA>
             </TD>
             <TD><SPAN style="WIDTH: 133px; DISPLAY: inline-block"
                 class=chkBox disabled><INPUT id=ctl00_mainContent_chkAbandom
