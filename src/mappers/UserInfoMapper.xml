@@ -64,9 +64,23 @@
   	order by user.user_id asc
   </select>
   
+  <sql id="userInfoAdd">
+     user_id
+    ,user_name
+    ,password
+    ,tel_number
+    ,mail_address
+    ,authority_cd
+    ,memo
+    ,del_flg
+    ,create_user
+    ,create_date
+    ,update_user
+    ,update_date
+  </sql>
   <insert id="insertUserInfo" parameterType="com.masago.bean.UserInfoBean">
 	insert into tb_tr_user_info(
-	<include refid="Base_Column_List"/>
+	<include refid="userInfoAdd"/>
 	)
 	values(
 	#{userInfo.userId},

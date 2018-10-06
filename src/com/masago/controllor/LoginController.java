@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.masago.bean.UserInfoBean;
+import com.masago.common.Base64Utils;
 import com.masago.common.PropertiesFileLoader;
 import com.masago.service.UserInfoService;
 
@@ -36,7 +37,7 @@ public class LoginController {
             //如果用户不为空，设在Session域中
             //session.setAttribute("user", userInfoBean);
         	UserInfoBean userInfoBean = userInfoList.get(0);
-        	if(password.equals(userInfoBean.getPassword())){
+        	if(password.equals(Base64Utils.base64Decode(userInfoBean.getPassword()))){
 				//パスワード一致
         		session.setAttribute("userInfo", userInfoBean);
         		//重定向到main页面中

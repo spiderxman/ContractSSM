@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.masago.bean.MstAuthorityBean;
 import com.masago.bean.UserInfoBean;
+import com.masago.common.Base64Utils;
 import com.masago.common.PropertiesFileLoader;
 import com.masago.service.MstInfoService;
 import com.masago.service.UserInfoService;
@@ -55,6 +56,7 @@ public class UserAddController {
      */
     @RequestMapping("/UserAdd")
     public String userAdd(UserInfoBean userInfo, Model mv){
+    	userInfo.setPassword(Base64Utils.base64Encode(userInfo.getPassword()));
     	userInfoService.setUserInfo(userInfo);
     	mv.addAttribute("errorMessage", PropertiesFileLoader.getProperty("MSG_E003"));
         return "redirect:/UserAddInit";

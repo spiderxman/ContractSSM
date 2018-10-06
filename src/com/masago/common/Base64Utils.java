@@ -32,6 +32,17 @@ public class Base64Utils {
 		in.close();
 		return Base64.getEncoder().withoutPadding().encodeToString(data);
 	}
+	
+	/**
+	 * 入力された文字列をBASE64変換する。
+	 *
+	 * @param in 変換対象データ
+	 * @return BASE64文字列
+	 * @throws IOException
+	 */
+	public static String base64Encode(String str){
+		return Base64.getEncoder().withoutPadding().encodeToString(str.getBytes());
+	}
 
 	/**
 	 * 入力されたBASE64をデータ変換する。
@@ -52,6 +63,18 @@ public class Base64Utils {
         }finally {
             fos.close();
         }
+	}
+	
+	/**
+	 * 入力されたBASE64を文字列へ変換する。
+	 *
+	 * @param in BASE64文字列
+	 * @return 文字列
+	 * @throws IOException
+	 */
+	public static String base64Decode(String strBase64) {
+		byte[] bytes = Base64.getDecoder().decode(strBase64);
+		return new String(bytes);
 	}
 
 }
